@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_utility_tracker/screens/setting_screen.dart';
 
-import './screens/start_screen.dart';
-import './screens/auth_method_screen.dart';
-import './screens/bills_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,21 +15,22 @@ class MyApp extends StatelessWidget {
       title: 'Utility Tracker',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: const Color(0xffffe6ab),
-          onPrimary: const Color(0xFF000000),
-          secondary: const Color(0xFF25211C),
+          primary: const Color(0xFFFFE6AB),
+          onPrimary: const Color(0x2C292100),
+          secondary: const Color(0x2A252000),
           onSecondary: const Color(0xFFEBEBEB),
           background: const Color(0xFFF7F6F0),
           onBackground: const Color(0xFFFFFFFF),
         ),
       ),
       home: Scaffold(
-        body: BillsScreen(),
+        appBar: AppBar(
+          title: const Text('Utility Tracker'),
+        ),
+        body: const Center(
+          child: Text('Hello World'),
+        ),
       ),
-      routes: {
-        StartScreen.routeName: (context) => const StartScreen(),
-        AuthMethodScreen.routeName: (context) => const AuthMethodScreen(),
-      },
     );
   }
 }
