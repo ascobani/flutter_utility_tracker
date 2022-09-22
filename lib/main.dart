@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_utility_tracker/screens/welcome_auth_form.dart';
 
 import './screens/start_screen.dart';
 import './screens/bills_screen.dart';
 import './screens/report_issue_screen.dart';
 import './screens/sign_in_auth_form.dart';
-
-
+import './screens/sign_up_auth_form.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,12 +30,15 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const Scaffold(
-        body: SignInAuthScreen(),
+        body: StartScreen(),
       ),
       routes: {
         StartScreen.routeName: (context) => const StartScreen(),
         ReportIssueScreen.routeName: (context) => ReportIssueScreen(),
         BillsScreen.routeName: (context) => const BillsScreen(),
+        SignInAuthScreen.routeName: (context) => const SignInAuthScreen(),
+        SignUpAuthScreen.routeName: (context) => const SignUpAuthScreen(),
+        WelcomeAuthScreen.routeName: (context) => const WelcomeAuthScreen(),
       },
     );
   }

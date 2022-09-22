@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_utility_tracker/screens/bills_screen.dart';
+import 'package:flutter_utility_tracker/screens/sign_in_auth_form.dart';
 
 class SignUpAuthScreen extends StatefulWidget {
   const SignUpAuthScreen({super.key});
 
   @override
   State<SignUpAuthScreen> createState() => _SignUpAuthScreenState();
+  static const routeName = '/sign-up-auth-screen';
 }
 
 class _SignUpAuthScreenState extends State<SignUpAuthScreen> {
@@ -28,136 +31,57 @@ class _SignUpAuthScreenState extends State<SignUpAuthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Create an Account',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 30,
-          ),
-        ),
-        const SizedBox(height: 20),
-        const Text(
-          'Create an account so you can use Utility Tracker',
-          style: TextStyle(color: Colors.black54),
-        ),
-        const SizedBox(height: 25),
-        //e-mail input
-        TextFormField(
-          focusNode: _focusNode1,
-          textCapitalization: TextCapitalization.none,
-          enableSuggestions: false,
-          autocorrect: false,
-          keyboardType: TextInputType.emailAddress,
-          key: const ValueKey('email'),
-          validator: (value) {
-            if (value!.isEmpty) {
-              if (kDebugMode) {
-                print('Email is empty');
-              }
-              return 'Please provide an email address';
-            } else if (!value.contains('@')) {
-              if (kDebugMode) {
-                print('Email is invalid');
-              }
-              return 'Please provide a valid email address';
-            }
-            return null;
-          },
-          onSaved: (value) {
-            _userEmail = value!;
-          },
-          decoration: InputDecoration(
-            labelText: 'Email address',
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.background, width: 2),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.primary, width: 2),
-            ),
-            prefixIcon:
-                Icon(Icons.mail, color: Theme.of(context).colorScheme.primary),
-          ),
-        ),
-        const SizedBox(height: 10),
-        //username input
-        TextFormField(
-          focusNode: _focusNode2,
-          textCapitalization: TextCapitalization.none,
-          enableSuggestions: false,
-          autocorrect: false,
-          keyboardType: TextInputType.emailAddress,
-          key: const ValueKey('username'),
-          validator: (value) {
-            if (value!.isEmpty) {
-              if (kDebugMode) {
-                print('Username is empty');
-              }
-              return 'Please provide a username';
-            } else if (value.length < 4) {
-              if (kDebugMode) {
-                print('Username is too short');
-              }
-              return 'Username must be at least 4 characters long';
-            }
-            return null;
-          },
-          onSaved: (value) {
-            _username = value!;
-          },
-          decoration: InputDecoration(
-            labelText: 'Username',
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.background, width: 2),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.primary, width: 2),
-            ),
-            prefixIcon: Icon(Icons.account_circle,
-                color: Theme.of(context).colorScheme.primary),
-          ),
-        ),
-        const SizedBox(height: 10),
-        //password input
-        Stack(
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Theme.of(context).colorScheme.background,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const Text(
+              'Create an Account',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Create an account so you can use Utility Tracker',
+              style: TextStyle(color: Colors.black54),
+            ),
+            const SizedBox(height: 25),
+            //e-mail input
             TextFormField(
-              obscureText: !_showPassword ? true : false,
-              focusNode: _focusNode3,
+              focusNode: _focusNode1,
               textCapitalization: TextCapitalization.none,
               enableSuggestions: false,
               autocorrect: false,
               keyboardType: TextInputType.emailAddress,
-              key: const ValueKey('password'),
+              key: const ValueKey('email'),
               validator: (value) {
                 if (value!.isEmpty) {
                   if (kDebugMode) {
-                    print('Password is empty');
+                    print('Email is empty');
                   }
-                  return 'Please provide a password';
-                } else if (value.length < 7) {
+                  return 'Please provide an email address';
+                } else if (!value.contains('@')) {
                   if (kDebugMode) {
-                    print('Password is too short');
+                    print('Email is invalid');
                   }
-                  return 'Password must be at least 7 characters long';
+                  return 'Please provide a valid email address';
                 }
                 return null;
               },
               onSaved: (value) {
-                _userPassword = value!;
+                _userEmail = value!;
               },
               decoration: InputDecoration(
-                labelText: 'Password',
+                labelText: 'Email address',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(
@@ -169,54 +93,38 @@ class _SignUpAuthScreenState extends State<SignUpAuthScreen> {
                   borderSide: BorderSide(
                       color: Theme.of(context).colorScheme.primary, width: 2),
                 ),
-                prefixIcon: Icon(Icons.lock,
+                prefixIcon: Icon(Icons.mail,
                     color: Theme.of(context).colorScheme.primary),
               ),
             ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: IconButton(
-                onPressed: () {
-                  setState(() {
-                    _showPassword = !_showPassword;
-                  });
-                },
-                icon: Icon(
-                  _showPassword ? Icons.visibility_off : Icons.visibility,
-                  color: Colors.black54,
-                ),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 10),
-        //confirm password input
-        Stack(
-          children: [
+            const SizedBox(height: 10),
+            //username input
             TextFormField(
-              obscureText: !_showPassword ? true : false,
-              focusNode: _focusNode4,
+              focusNode: _focusNode2,
               textCapitalization: TextCapitalization.none,
               enableSuggestions: false,
               autocorrect: false,
               keyboardType: TextInputType.emailAddress,
-              key: const ValueKey('confirmPassword'),
+              key: const ValueKey('username'),
               validator: (value) {
                 if (value!.isEmpty) {
                   if (kDebugMode) {
-                    print('Confirm Password is empty');
+                    print('Username is empty');
                   }
-                  return 'Please confirm your password';
-                } else if (value == _userPassword) {
+                  return 'Please provide a username';
+                } else if (value.length < 4) {
                   if (kDebugMode) {
-                    print('Confirm Password is not match');
+                    print('Username is too short');
                   }
-                  return 'Password does not match';
+                  return 'Username must be at least 4 characters long';
                 }
                 return null;
               },
+              onSaved: (value) {
+                _username = value!;
+              },
               decoration: InputDecoration(
-                labelText: 'Confirm Password',
+                labelText: 'Username',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(
@@ -228,27 +136,232 @@ class _SignUpAuthScreenState extends State<SignUpAuthScreen> {
                   borderSide: BorderSide(
                       color: Theme.of(context).colorScheme.primary, width: 2),
                 ),
-                prefixIcon: Icon(Icons.lock,
+                prefixIcon: Icon(Icons.account_circle,
                     color: Theme.of(context).colorScheme.primary),
               ),
             ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: IconButton(
-                onPressed: () {
-                  setState(() {
-                    _showPassword = !_showPassword;
-                  });
-                },
-                icon: Icon(
-                  _showPassword ? Icons.visibility_off : Icons.visibility,
-                  color: Colors.black54,
+            const SizedBox(height: 10),
+            //password input
+            Stack(
+              children: [
+                TextFormField(
+                  obscureText: !_showPassword ? true : false,
+                  focusNode: _focusNode3,
+                  textCapitalization: TextCapitalization.none,
+                  enableSuggestions: false,
+                  autocorrect: false,
+                  keyboardType: TextInputType.emailAddress,
+                  key: const ValueKey('password'),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      if (kDebugMode) {
+                        print('Password is empty');
+                      }
+                      return 'Please provide a password';
+                    } else if (value.length < 7) {
+                      if (kDebugMode) {
+                        print('Password is too short');
+                      }
+                      return 'Password must be at least 7 characters long';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _userPassword = value!;
+                  },
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.background,
+                          width: 2),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.primary,
+                          width: 2),
+                    ),
+                    prefixIcon: Icon(Icons.lock,
+                        color: Theme.of(context).colorScheme.primary),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 5),
+                      IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _showPassword = !_showPassword;
+                          });
+                        },
+                        icon: Icon(
+                          _showPassword
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            //confirm password input
+            Stack(
+              children: [
+                TextFormField(
+                  obscureText: !_showPassword ? true : false,
+                  focusNode: _focusNode4,
+                  textCapitalization: TextCapitalization.none,
+                  enableSuggestions: false,
+                  autocorrect: false,
+                  keyboardType: TextInputType.emailAddress,
+                  key: const ValueKey('confirmPassword'),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      if (kDebugMode) {
+                        print('Confirm Password is empty');
+                      }
+                      return 'Please confirm your password';
+                    } else if (value == _userPassword) {
+                      if (kDebugMode) {
+                        print('Confirm Password is not match');
+                      }
+                      return 'Password does not match';
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    labelText: 'Confirm Password',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.background,
+                          width: 2),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.primary,
+                          width: 2),
+                    ),
+                    prefixIcon: Icon(Icons.lock,
+                        color: Theme.of(context).colorScheme.primary),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 5),
+                      IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _showPassword = !_showPassword;
+                          });
+                        },
+                        icon: Icon(
+                          _showPassword
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const Spacer(),
+            SizedBox(
+              width: double.infinity,
+              child: Card(
+                elevation: 0,
+                color: Theme.of(context).colorScheme.secondary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushReplacementNamed(BillsScreen.routeName);
+                  },
+                  child: const Text('Create an Account'),
                 ),
               ),
             ),
+            const SizedBox(height: 20),
+            const Center(
+              child: Text('or Sign Up with'),
+            ),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {},
+                  child: Card(
+                    color: Theme.of(context).colorScheme.background,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50),
+                      side: const BorderSide(color: Colors.grey),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CircleAvatar(
+                        backgroundColor:
+                            Theme.of(context).colorScheme.background,
+                        child: Image.asset('assets/images/apple_icon.png'),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                GestureDetector(
+                  onTap: () {},
+                  child: Card(
+                    color: Theme.of(context).colorScheme.background,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50),
+                      side: const BorderSide(color: Colors.grey),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CircleAvatar(
+                        backgroundColor:
+                            Theme.of(context).colorScheme.background,
+                        child: Image.asset('assets/images/google_icon.png'),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('Already have an account'),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushReplacementNamed(SignInAuthScreen.routeName);
+                  },
+                  child: const Text(
+                    'Sign In',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
           ],
         ),
-      ],
+      ),
     );
   }
 }

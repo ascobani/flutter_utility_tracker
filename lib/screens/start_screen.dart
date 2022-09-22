@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_utility_tracker/screens/bills_screen.dart';
+import 'package:flutter_utility_tracker/screens/sign_in_auth_form.dart';
 
 class StartScreen extends StatelessWidget {
   static const routeName = '/start-screen';
@@ -26,7 +27,8 @@ class StartScreen extends StatelessWidget {
               ),
               onPressed: () {
                 //TODO: Navigate to AuthMethodScreen
-                Navigator.of(context).pushReplacementNamed(BillsScreen.routeName);
+                Navigator.of(context)
+                    .pushReplacementNamed(SignInAuthScreen.routeName);
               },
               child: Text(
                 'Let\'s Start',
