@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import './screens/start_screen.dart';
 import './screens/bills_screen.dart';
 import './screens/report_issue_screen.dart';
-import './screens/setting_screen.dart';
+import './screens/sign_in_auth_form.dart';
+
+
 
 void main() {
   runApp(const MyApp());
@@ -28,12 +30,12 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const Scaffold(
-        body: StartScreen(),
+        body: SignInAuthScreen(),
       ),
       routes: {
         StartScreen.routeName: (context) => const StartScreen(),
         ReportIssueScreen.routeName: (context) => ReportIssueScreen(),
-        BillsScreen.routeName: (context) => BillsScreen(),
+        BillsScreen.routeName: (context) => const BillsScreen(),
       },
     );
   }
