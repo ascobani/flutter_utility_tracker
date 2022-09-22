@@ -18,6 +18,7 @@ class BillCardView extends StatelessWidget {
       height: 156,
       width: 195,
       child: Card(
+        elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(13),
         ),

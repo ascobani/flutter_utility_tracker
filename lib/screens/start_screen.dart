@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_utility_tracker/screens/bills_screen.dart';
 
 class StartScreen extends StatelessWidget {
   static const routeName = '/start-screen';
@@ -8,6 +9,36 @@ class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomAppBar(
+        elevation: 0,
+        color: Theme.of(context).colorScheme.primary,
+        child: Padding(
+          padding: const EdgeInsets.only(right: 20.0, left: 20.0),
+          child: SizedBox(
+            height: 50,
+            width: 370,
+            child: TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: Theme.of(context).colorScheme.onPrimary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              onPressed: () {
+                //TODO: Navigate to AuthMethodScreen
+                Navigator.of(context).pushReplacementNamed(BillsScreen.routeName);
+              },
+              child: Text(
+                'Let\'s Start',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: Column(
         children: <Widget>[
@@ -78,29 +109,6 @@ class StartScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 19,
                 color: Colors.black54,
-              ),
-            ),
-          ),
-          const SizedBox(height: 120),
-          SizedBox(
-            height: 50,
-            width: 370,
-            child: TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.onPrimary,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              onPressed: () {
-                //TODO: Navigate to AuthMethodScreen
-              },
-              child: Text(
-                'Lets\'s Start',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
               ),
             ),
           ),
