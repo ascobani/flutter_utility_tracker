@@ -31,30 +31,35 @@ class _SignUpAuthScreenState extends State<SignUpAuthScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Theme.of(context).colorScheme.background,
+        toolbarHeight: 20,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'Create an Account',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 30,
+                fontSize: size.width * 0.07, // fontSize: 30
               ),
             ),
-            const SizedBox(height: 20),
-            const Text(
+            SizedBox(height: size.height * 0.022), // height: 20
+            Text(
               'Create an account so you can use Utility Tracker',
-              style: TextStyle(color: Colors.black54),
+              style: TextStyle(
+                color: Colors.black54,
+                fontSize: size.width * 0.033, //fontSize: 16
+              ),
             ),
-            const SizedBox(height: 25),
+            SizedBox(height: size.height * 0.0275), // height: 25
             //e-mail input
             TextFormField(
               focusNode: _focusNode1,
@@ -93,8 +98,11 @@ class _SignUpAuthScreenState extends State<SignUpAuthScreen> {
                   borderSide: BorderSide(
                       color: Theme.of(context).colorScheme.primary, width: 2),
                 ),
-                prefixIcon: Icon(Icons.mail,
-                    color: Theme.of(context).colorScheme.primary),
+                prefixIcon: Icon(
+                  Icons.mail,
+                  color: Theme.of(context).colorScheme.primary,
+                  size: size.width * 0.055,
+                ),
               ),
             ),
             const SizedBox(height: 10),
@@ -140,7 +148,7 @@ class _SignUpAuthScreenState extends State<SignUpAuthScreen> {
                     color: Theme.of(context).colorScheme.primary),
               ),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: size.height * 0.011), // 20
             //password input
             Stack(
               children: [
@@ -183,15 +191,18 @@ class _SignUpAuthScreenState extends State<SignUpAuthScreen> {
                           color: Theme.of(context).colorScheme.primary,
                           width: 2),
                     ),
-                    prefixIcon: Icon(Icons.lock,
-                        color: Theme.of(context).colorScheme.primary),
+                    prefixIcon: Icon(
+                      Icons.lock,
+                      color: Theme.of(context).colorScheme.primary,
+                      size: size.width * 0.055,
+                    ),
                   ),
                 ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Column(
                     children: [
-                      const SizedBox(height: 5),
+                      SizedBox(height: size.height * 0.0055), // 20
                       IconButton(
                         onPressed: () {
                           setState(() {
@@ -203,6 +214,7 @@ class _SignUpAuthScreenState extends State<SignUpAuthScreen> {
                               ? Icons.visibility_off
                               : Icons.visibility,
                           color: Colors.black54,
+                          size: size.width * 0.055,
                         ),
                       ),
                     ],
@@ -210,7 +222,7 @@ class _SignUpAuthScreenState extends State<SignUpAuthScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: size.height * 0.011), // 20
             //confirm password input
             Stack(
               children: [
@@ -258,7 +270,7 @@ class _SignUpAuthScreenState extends State<SignUpAuthScreen> {
                   alignment: Alignment.centerRight,
                   child: Column(
                     children: [
-                      const SizedBox(height: 5),
+                      SizedBox(height: size.height * 0.0055), // 5
                       IconButton(
                         onPressed: () {
                           setState(() {
@@ -291,15 +303,25 @@ class _SignUpAuthScreenState extends State<SignUpAuthScreen> {
                     Navigator.of(context)
                         .pushReplacementNamed(BillsScreen.routeName);
                   },
-                  child: const Text('Create an Account'),
+                  child: Text(
+                    'Create an Account',
+                    style: TextStyle(
+                      fontSize: size.width * 0.033, //fontSize: 16
+                    ),
+                  ),
                 ),
               ),
             ),
-            const SizedBox(height: 20),
-            const Center(
-              child: Text('or Sign Up with'),
+            SizedBox(height: size.height * 0.022), // 20
+            Center(
+              child: Text(
+                'or Sign Up with',
+                style: TextStyle(
+                  fontSize: size.width * 0.033, //fontSize: 16
+                ),
+              ),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: size.height * 0.011), // 10
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -321,7 +343,7 @@ class _SignUpAuthScreenState extends State<SignUpAuthScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(width: 10),
+                SizedBox(width: size.height * 0.011), // 10
                 GestureDetector(
                   onTap: () {},
                   child: Card(
@@ -345,20 +367,28 @@ class _SignUpAuthScreenState extends State<SignUpAuthScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('Already have an account'),
+                 Text(
+                  'Already have an account',
+                  style: TextStyle(
+                    fontSize: size.width * 0.033, //fontSize: 16
+                  ),
+                ),
                 TextButton(
                   onPressed: () {
                     Navigator.of(context)
                         .pushReplacementNamed(SignInAuthScreen.routeName);
                   },
-                  child: const Text(
+                  child:  Text(
                     'Sign In',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: size.width * 0.033, //fontSize: 16
+                    ),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: size.height * 0.022), // 20
           ],
         ),
       ),

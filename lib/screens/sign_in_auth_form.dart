@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_utility_tracker/screens/bills_screen.dart';
 import 'package:flutter_utility_tracker/screens/welcome_auth_form.dart';
 
 class SignInAuthScreen extends StatefulWidget {
-
   static const routeName = '/sign-in-auth-screen';
 
   // UserEmail
@@ -27,36 +27,36 @@ class _SignInAuthScreenState extends State<SignInAuthScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Theme
-          .of(context)
-          .colorScheme
-          .background,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Theme
-            .of(context)
-            .colorScheme
-            .background,
+        backgroundColor: Theme.of(context).colorScheme.background,
+        toolbarHeight: 20,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'Welcome Back!',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 30,
+                fontSize: size.width * 0.07,
               ),
             ),
-            const SizedBox(height: 20),
-            const Text(
+            SizedBox(height: size.height * 0.022),
+            Text(
               'We\'re happy to see. You can Login and continue consulting your problem or read some tips.',
-              style: TextStyle(color: Colors.black54),
+              style: TextStyle(
+                color: Colors.black54,
+                fontSize: size.width * 0.035,
+              ),
             ),
-            const SizedBox(height: 25),
+
+            SizedBox(height: size.height * 0.025),
             TextFormField(
               focusNode: _focusNode1,
               textCapitalization: TextCapitalization.none,
@@ -67,28 +67,22 @@ class _SignInAuthScreenState extends State<SignInAuthScreen> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(
-                      color: Theme
-                          .of(context)
-                          .colorScheme
-                          .background,
-                      width: 2),
+                    color: Theme.of(context).colorScheme.background,
+                    width: 2,
+                  ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(
-                      color: Theme
-                          .of(context)
-                          .colorScheme
-                          .primary, width: 2),
+                    color: Theme.of(context).colorScheme.primary,
+                    width: 2,
+                  ),
                 ),
                 prefixIcon: Icon(Icons.face,
-                    color: Theme
-                        .of(context)
-                        .colorScheme
-                        .primary),
+                    color: Theme.of(context).colorScheme.primary),
               ),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: size.height * 0.011),
             Stack(
               children: [
                 TextFormField(
@@ -101,33 +95,25 @@ class _SignInAuthScreenState extends State<SignInAuthScreen> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(
-                          color: Theme
-                              .of(context)
-                              .colorScheme
-                              .background,
+                          color: Theme.of(context).colorScheme.background,
                           width: 2),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(
-                          color: Theme
-                              .of(context)
-                              .colorScheme
-                              .primary,
-                          width: 2),
+                        color: Theme.of(context).colorScheme.primary,
+                        width: 2,
+                      ),
                     ),
                     prefixIcon: Icon(Icons.lock,
-                        color: Theme
-                            .of(context)
-                            .colorScheme
-                            .primary),
+                        color: Theme.of(context).colorScheme.primary),
                   ),
                 ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Column(
                     children: [
-                      const SizedBox(height: 5),
+                      SizedBox(height: size.height * 0.0055),
                       IconButton(
                         onPressed: () {
                           setState(() {
@@ -154,6 +140,7 @@ class _SignInAuthScreenState extends State<SignInAuthScreen> {
                   'Forgot Password?',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
+                    fontSize: size.width * 0.035,
                   ),
                 ),
               ),
@@ -163,34 +150,42 @@ class _SignInAuthScreenState extends State<SignInAuthScreen> {
               width: double.infinity,
               child: Card(
                 elevation: 0,
-                color: Theme
-                    .of(context)
-                    .colorScheme
-                    .secondary,
+                color: Theme.of(context).colorScheme.secondary,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.0),
                 ),
                 child: TextButton(
-                  onPressed: () {},
-                  child: const Text('Sign In'),
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushReplacementNamed(BillsScreen.routeName);
+                  },
+                  child: Text(
+                    'Sign In',
+                    style: TextStyle(
+                      fontSize: size.width * 0.035,
+                    ),
+                  ),
                 ),
               ),
             ),
-            const SizedBox(height: 20),
-            const Center(
-              child: Text('or Sign In with'),
+            SizedBox(height: size.height * 0.022),
+            Center(
+              child: Text(
+                'or Sign In with',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: size.width * 0.035,
+                ),
+              ),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: size.height * 0.011),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 GestureDetector(
                   onTap: () {},
                   child: Card(
-                    color: Theme
-                        .of(context)
-                        .colorScheme
-                        .background,
+                    color: Theme.of(context).colorScheme.background,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),
                       side: const BorderSide(color: Colors.grey),
@@ -199,23 +194,17 @@ class _SignInAuthScreenState extends State<SignInAuthScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: CircleAvatar(
                         backgroundColor:
-                        Theme
-                            .of(context)
-                            .colorScheme
-                            .background,
+                            Theme.of(context).colorScheme.background,
                         child: Image.asset('assets/images/apple_icon.png'),
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(width: 10),
+                SizedBox(width: size.width * 0.022),
                 GestureDetector(
                   onTap: () {},
                   child: Card(
-                    color: Theme
-                        .of(context)
-                        .colorScheme
-                        .background,
+                    color: Theme.of(context).colorScheme.background,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),
                       side: const BorderSide(color: Colors.grey),
@@ -224,10 +213,7 @@ class _SignInAuthScreenState extends State<SignInAuthScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: CircleAvatar(
                         backgroundColor:
-                        Theme
-                            .of(context)
-                            .colorScheme
-                            .background,
+                            Theme.of(context).colorScheme.background,
                         child: Image.asset('assets/images/google_icon.png'),
                       ),
                     ),
@@ -238,19 +224,29 @@ class _SignInAuthScreenState extends State<SignInAuthScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('I don\'t have an account'),
+                Text(
+                  'I don\'t have an account',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: size.width * 0.0313,
+                  ),
+                ),
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed(WelcomeAuthScreen.routeName);
+                    Navigator.of(context)
+                        .pushReplacementNamed(WelcomeAuthScreen.routeName);
                   },
-                  child: const Text(
+                  child: Text(
                     'Sign Up',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: size.width * 0.0319,
+                    ),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: size.height * 0.022),
           ],
         ),
       ),

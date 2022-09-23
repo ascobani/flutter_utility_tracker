@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_utility_tracker/screens/report_issue_screen.dart';
 import 'package:intl/intl.dart';
@@ -26,6 +28,7 @@ class _BillsScreenState extends State<BillsScreen>
   void initState() {
     // TODO: implement initState
     super.initState();
+    print(0.011627906976744186 / 5);
 
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 400));
@@ -57,51 +60,84 @@ class _BillsScreenState extends State<BillsScreen>
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    double _width1 = size.width * 0.002325581395348837;
+    double _width5 = size.width * 0.011627906976744186;
+    double _width10 = size.width * 0.023255813953488372;
+    double _width20 = size.width * 0.046511627906976744;
+    double _width30 = size.width * 0.06976744186046512;
+    double _width40 = size.width * 0.09302325581395349;
+    double _height1 = size.width * 0.0010729613729614;
+    double _height5 = size.height * 0.005364806864807;
+    double _height10 = size.height * 0.0107296137296139999;
+    double _height20 = size.height * 0.0214592274592279999;
+    double _height30 = size.height * 0.032188841188841;
+    double _height40 = size.height * 0.047718454918455;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
-        toolbarHeight: 70,
+        toolbarHeight: 2 * _height40 + _height5,
         flexibleSpace: SafeArea(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 20.0),
+                padding: const EdgeInsets.only(
+                    right: 10.0, left: 10.0, bottom: 10.0, top: 10.0),
                 child: Column(
-                  children: const [
-                    Text('Welcome back,',
-                        style: TextStyle(color: Colors.black45, fontSize: 15)),
+                  children: [
+                    Text(
+                      'Welcome back,',
+                      style: TextStyle(
+                        color: Colors.black45,
+                        fontSize: size.width * 0.033, // fontSize: 16,
+                      ),
+                    ),
                     //TODO:FireBase: Get user name
-                    Text('John Doe',
-                        style: TextStyle(
-                            fontSize: 25, fontWeight: FontWeight.bold)),
+                    Text(
+                      'John Doe',
+                      style: TextStyle(
+                        fontSize: size.width * 0.0515, // fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ],
                 ),
               ),
               SlideTransition(
                 position: !_isScrolled
                     ? Tween<Offset>(
-                            begin: Offset.zero, end: const Offset(1, 0))
-                        .animate(_animationController1)
+                        begin: Offset.zero,
+                        end: const Offset(1, 0),
+                      ).animate(_animationController1)
                     : Tween<Offset>(
-                            begin: const Offset(0.71999, 0), end: Offset.zero)
+                            begin: Offset(_width1 * 0.84399, 0),
+                            end: Offset.zero)
                         .animate(_animationController),
                 child: Row(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(right:10.0),
+                      padding: const EdgeInsets.only(right: 10.0),
                       child: CircleAvatar(
-                        radius: 30,
-                        backgroundColor:
-                            Theme.of(context).colorScheme.primary,
+                        radius: _width20 + _width5, // radius: 22,
+                        backgroundColor: Theme.of(context).colorScheme.primary,
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right:20.0),
+                      padding: const EdgeInsets.only(right: 10.0),
                       child: SizedBox(
-                        width: 170,
-                        height: 64,
+                        width: max(
+                          155,
+                          4 * _height40 + _width5,
+                        ),
+                        // width: 170,
+                        height: min(
+                          64,
+                          _height40 + _height20 + _height10 + _height5,
+                        ),
+                        // height: 64,
                         child: Card(
                           elevation: 0,
                           color: Theme.of(context).colorScheme.secondary,
@@ -113,50 +149,52 @@ class _BillsScreenState extends State<BillsScreen>
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                         DateFormat.MMM()
                                             .format(DateTime.now())
                                             .toString(),
-                                        style: const TextStyle(
-                                            fontSize: 10,
+                                        style: TextStyle(
+                                            fontSize: _width10,
                                             color: Colors.white54)),
-                                    const SizedBox(height: 5),
+                                    SizedBox(height: _height5),
                                     Text(
                                       '₺3628.65',
                                       style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 18,
+                                        fontSize:
+                                            _width10 + _height5 + 3 * _width1,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                              const Spacer(),
+                              SizedBox(width: _width10),
                               SizedBox(
-                                width: 50,
-                                height: 50,
+                                width: max(_width40 + _width10, 30),
+                                height: max(30, _height40 + _height10),
                                 child: Card(
                                   elevation: 0,
-                                  color:
-                                      Theme.of(context).colorScheme.primary,
+                                  color: Theme.of(context).colorScheme.primary,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(5),
                                   ),
                                   child: TextButton(
                                     onPressed: () {},
-                                    child: const Text(
+                                    child: Text(
                                       'Pay',
-                                      style: TextStyle(color: Colors.black),
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: max(
+                                          10,
+                                          _width10 + 2 * _width1,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(
-                                width: 2,
                               ),
                             ],
                           ),
@@ -177,98 +215,113 @@ class _BillsScreenState extends State<BillsScreen>
               .restorablePushReplacementNamed(ReportIssueScreen.routeName);
         },
         backgroundColor: Theme.of(context).colorScheme.secondary,
-        child: const Icon(Icons.handyman),
+        child: Icon(
+          Icons.handyman,
+          size: _width20 + _width5,
+        ),
       ),
       body: SingleChildScrollView(
         controller: _scrollController,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 10),
-            SizedBox(
-              width: 390,
-              height: 200,
-              child: Card(
-                elevation: 0,
-                color: Theme.of(context).colorScheme.secondary,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
-                ),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 30),
-                    SizedBox(
-                      width: 380,
-                      child: Row(
+            SizedBox(height: _height10),
+            Padding(
+              padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+              child: SizedBox(
+                width: double.infinity,
+                height: max(
+                    170, 4 * _height40 + _height20 + _height10 + 6 * _height1),
+                child: Card(
+                  elevation: 0,
+                  color: Theme.of(context).colorScheme.secondary,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  child: Column(
+                    children: [
+                      SizedBox(height: _height30),
+                      SizedBox(
+                        width: double.infinity,
+                        child: Padding(
+                          padding:
+                              const EdgeInsets.only(right: 11.0, left: 11.0),
+                          child: Row(
+                            children: [
+                              Text(
+                                DateFormat.MMMM()
+                                    .format(DateTime.now())
+                                    .toString(),
+                                style: TextStyle(
+                                  fontSize: _width10 + _width5,
+                                  color: Colors.white54,
+                                ),
+                              ),
+                              const Spacer(),
+                              Text(
+                                'Due in 5 days',
+                                style: TextStyle(
+                                  fontSize: _width10 + _width5,
+                                  color: Colors.white54,
+                                ),
+                              ),
+                              SizedBox(width: _width20),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
                         children: [
-                          const SizedBox(width: 15),
-                          Text(
-                              DateFormat.MMMM()
-                                  .format(DateTime.now())
-                                  .toString(),
-                              style: const TextStyle(
-                                  fontSize: 15, color: Colors.white54)),
-                          const Spacer(),
-                          const Text('Due in 5 days',
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              ' ₺3628.65',
                               style: TextStyle(
-                                  fontSize: 15, color: Colors.white54)),
-                          const SizedBox(width: 20),
+                                fontSize: _width40 + _width10,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
                         ],
                       ),
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            ' ₺3628.65',
-                            style: const TextStyle(
-                              fontSize: 50,
-                              color: Colors.white,
+                      SizedBox(height: _height10),
+                      SizedBox(
+                        width: min(360, 9 * _width40),
+                        height: _height40 + _height10 + 3 * _height1,
+                        child: Card(
+                          elevation: 0,
+                          color: Theme.of(context).colorScheme.primary,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Center(
+                            child: TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                'Pay now',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: min(
+                                    16,
+                                    _width10 + _width5,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    SizedBox(
-                      width: 360,
-                      height: 53,
-                      child: Card(
-                        elevation: 0,
-                        color: Theme.of(context).colorScheme.primary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: SizedBox(
-                          width: 100,
-                          height: 30,
-                          child: Center(
-                            child: TextButton(
-                                onPressed: () {},
-                                child: const Text(
-                                  'Pay now',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
-                                )),
-                          ),
-                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: _height20),
             Row(
               children: [
-                const SizedBox(
-                  width: 20,
-                ),
+                SizedBox(width: _width20),
                 ExpensesCardView(
                   electricityBill: 989.23,
                   waterBill: 451.56,
@@ -279,23 +332,27 @@ class _BillsScreenState extends State<BillsScreen>
             ),
             Padding(
               padding:
-                  const EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0),
+                  const EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0),
               child: Row(
                 children: [
-                  const Text('Messages',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15)),
+                  Text(
+                    'Messages',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: _width10 + _width5,
+                    ),
+                  ),
                   const Spacer(),
                   TextButton(
                     onPressed: () {},
-                    child: const Text(
+                    child: Text(
                       'See all',
                       style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15),
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: _width10 + _width5,
+                      ),
                     ),
                   ),
                 ],

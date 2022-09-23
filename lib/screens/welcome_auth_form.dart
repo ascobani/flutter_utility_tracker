@@ -9,25 +9,36 @@ class WelcomeAuthScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Theme.of(context).colorScheme.background,
+        toolbarHeight: 20,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            const Text(
+            Text(
               'Welcome to Utility Tracker!',
-              style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: size.width * 0.1157,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            const SizedBox(height: 30),
-            const Text(
+            SizedBox(height: size.height * 0.033),
+            Text(
               'Here will connect you with experts or specialists in various fields, so you can get consultation vie text message or video call. Or be specialist to help people and eran money',
-              style: TextStyle(color: Colors.black54, fontSize: 16),
-              strutStyle: StrutStyle(height: 1.7),
+              style: TextStyle(
+                color: Colors.black54,
+                fontSize: size.width * 0.037,
+              ),
+              strutStyle: StrutStyle(
+                height: size.width * 0.0037,
+              ),
             ),
             const Spacer(),
             SizedBox(
@@ -40,17 +51,18 @@ class WelcomeAuthScreen extends StatelessWidget {
                 ),
                 child: TextButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed(SignUpAuthScreen.routeName);
+                    Navigator.of(context)
+                        .pushReplacementNamed(SignUpAuthScreen.routeName);
                   },
                   child: const Text('Create an Account'),
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: size.height * 0.02),
             const Center(
               child: Text('or Sign Up with'),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: size.height * 0.01),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -72,7 +84,7 @@ class WelcomeAuthScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: 10),
+                SizedBox(width: size.height * 0.014),
                 GestureDetector(
                   onTap: () {},
                   child: Card(
@@ -109,7 +121,7 @@ class WelcomeAuthScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: size.height * 0.023),
           ],
         ),
       ),

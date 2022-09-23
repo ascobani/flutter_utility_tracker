@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class CheckBoxCard extends StatefulWidget {
@@ -27,6 +29,19 @@ class CheckBoxCard extends StatefulWidget {
 class _CheckBoxCardState extends State<CheckBoxCard> {
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    double _width1 = size.width * 0.002325581395348837;
+    double _width5 = size.width * 0.011627906976744186;
+    double _width10 = size.width * 0.023255813953488372;
+    double _width20 = size.width * 0.046511627906976744;
+    double _width30 = size.width * 0.06976744186046512;
+    double _width40 = size.width * 0.09302325581395349;
+    double _height1 = size.width * 0.0010729613729614;
+    double _height5 = size.height * 0.005364806864807;
+    double _height10 = size.height * 0.0107296137296139999;
+    double _height20 = size.height * 0.0214592274592279999;
+    double _height30 = size.height * 0.032188841188841;
+    double _height40 = size.height * 0.047718454918455;
     return Row(
       children: [
         GestureDetector(
@@ -36,7 +51,7 @@ class _CheckBoxCardState extends State<CheckBoxCard> {
             });
           },
           child: SizedBox(
-            width: 195,
+            width: max(167.5, 6 * _width30 + _width10 + 2 * _width1),
             height: 165,
             child: Card(
               elevation: 0,
@@ -105,7 +120,7 @@ class _CheckBoxCardState extends State<CheckBoxCard> {
             });
           },
           child: SizedBox(
-            width: 195,
+            width: max(167.5, 6 * _width30 + _width10 + 2 * _width1),
             height: 165,
             child: Card(
               elevation: 0,
